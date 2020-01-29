@@ -14,6 +14,6 @@ class Repo{
     _restClient = RestClient(_dioClient);
   }
 
-  Future<NewsListResponse> fetchNews(String country, int pageNumber) async =>
-      await _restClient.getTasks('us',10,pageNumber,theNewsDBApiKey );
+  Future<NewsListResponse> fetchNews(String country,int pageSize, int pageNumber) async =>
+      await _restClient.getTasks(country,pageSize,pageNumber,theNewsDBApiKey );
 }
