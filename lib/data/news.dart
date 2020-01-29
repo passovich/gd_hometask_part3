@@ -13,6 +13,8 @@ class News{
   ];
   int likes = 10;
   bool liked = false;
+  String defImageUrl = 'https://www.dzo.com.ua/tenders/catalog/products/3319-SANG-0201705085401-526321';
+
 
   @JsonKey(name: 'urlToImage')
   String imageUrl;

@@ -21,7 +21,11 @@ class NewsWidget extends StatelessWidget {
         child: Column(
           children:<Widget>[
             GestureDetector(
-              child: Image.network(_item.imageUrl,width: double.infinity,fit: BoxFit.fitWidth,),
+              child: Image.network(
+                _item.imageUrl==null? _item.defImageUrl:_item.imageUrl,
+                width: double.infinity,
+                fit: BoxFit.fitWidth,
+              ),
               onTap: () => _navigateToDetail(context),
             ),
             LikeButtons(_item),

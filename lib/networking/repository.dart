@@ -15,5 +15,5 @@ class Repo{
   }
 
   Future<NewsListResponse> fetchNews(String country, int pageNumber) async =>
-      await _restClient.getTasks('us',20,2,theNewsDBApiKey );
+      await _restClient.getTasks('us',10,pageNumber,theNewsDBApiKey );
 }

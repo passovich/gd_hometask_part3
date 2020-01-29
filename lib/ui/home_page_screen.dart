@@ -14,11 +14,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  ScrollController _scrollController = ScrollController();
 
+  @override
+  void initState() {
+    var bloc = BlocProvider.of<NewsBlock>(context);
+    bloc.fetchNews();
+    _scrollController.addListener((){
+      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
+        bloc.fetchNews();
+        print('End of list, loading new page');
+      }
+    });
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
      return Scaffold(
-       appBar: AppBar(title: Text('GD - Hometask part 2'),),
+       appBar: AppBar(title: Text('GD - Hometask part 3'),),
       body: buildBody(context),
     );
   }
@@ -46,11 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: Container(
               child: ListView.builder(
+                controller: _scrollController,
                 scrollDirection: Axis.vertical,
                 itemCount: list.length,
                 itemBuilder: (context, index){
                   return Container(child: NewsWidget(list[index]));
-              },),
+                },),
             ),
           ),
           Buttons(),
