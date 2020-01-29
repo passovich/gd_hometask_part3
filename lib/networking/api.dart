@@ -1,7 +1,6 @@
 import 'package:grid_first_dz/networking/response/news_list_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:retrofit/retrofit.dart';
-
 import 'package:dio/dio.dart';
 
 part 'api.g.dart';
