@@ -8,7 +8,7 @@ import 'base_bloc.dart';
 class NewsBlock extends Bloc{
   final _repo = Repo.instance;
   int _page = 1;
-  int _pageSize = 20;
+  int _pageSize = 5;
   String defCountry = 'gb';
 
   final _newsListStream = BehaviorSubject<List<News>>();
@@ -19,15 +19,20 @@ class NewsBlock extends Bloc{
 
   Stream<List<News>> get newsStream => _newsListStream.stream;
 
-  void fetchNews() async {
-    var news = await _repo.fetchNews(defCountry,_pageSize,_page++);
+  void fetchNews(String country) async {
+    var news = await _repo.fetchNews(country,_pageSize,_page++);
     _newsListStream.value.addAll(news.news);
     _newsListStream.sink.add(_newsListStream.value);
-    print("fetchNews page=$_page");
+    print('country = '+country);
   }
 
+  void clear(){
+    _page=1;
+    _newsListStream.sink.add([]);
+  }
   @override
   void dispose(){
     _newsListStream.close();
   }
 }
+

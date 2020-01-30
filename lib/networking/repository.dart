@@ -2,7 +2,7 @@ import 'package:grid_first_dz/networking/api.dart';
 import 'package:grid_first_dz/networking/response/news_list_response.dart';
 import 'package:dio/dio.dart';
 
-const String theNewsDBApiKey = '27d0754b351e4f3886839fbdcbb2c14b';
+const String theNewsDBApiKey = '################################';
 
 class Repo{
 

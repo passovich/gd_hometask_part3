@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:grid_first_dz/ui/home_page_screen.dart';
 
 class Buttons extends StatefulWidget{
+  BuildContext context;
+  int _countryId;
+
+  Buttons(this._countryId);
+
   @override
-  createState()=>ButtonsState();
+  createState()=>ButtonsState(_countryId);
 }
 
 class ButtonsState extends State<Buttons>{
+  int _countryId = 1;
+  var _country = ['ua','ru','us','gb','cn'];
+
+  ButtonsState(this._countryId);
+
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -13,18 +24,45 @@ class ButtonsState extends State<Buttons>{
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          IconButton(icon: Icon(Icons.home,size: 30,)),
-          IconButton(icon: Icon(Icons.search,size: 30,)),
-          IconButton(icon: Icon(Icons.add_circle_outline,size: 30,)),
-          IconButton(icon: Icon(Icons.favorite_border,size: 30)),
-          Image.network(
-            'https://v.fastcdn.co/u/c67c6bbe/47349885-0-r-kostricin.png',
-            width: 30,
-            height: 30,
-            fit: BoxFit.fill,
-          ),
+          IconButton(
+            icon: Text(
+              'UA',
+              style: TextStyle(fontWeight: _countryId == 0 ? FontWeight.bold:FontWeight.normal),
+            ),
+            iconSize: 30,onPressed: () => _navigateToHome(context,countryId: 0),),
+          IconButton(
+            icon: Text(
+              'RU',
+              style: TextStyle(fontWeight: _countryId == 1 ? FontWeight.bold:FontWeight.normal),
+            ),
+            iconSize: 30,onPressed: () => _navigateToHome(context,countryId: 1),),
+          IconButton(
+            icon: Text(
+              'US',
+              style: TextStyle(fontWeight: _countryId == 2 ? FontWeight.bold:FontWeight.normal),
+            ),
+            iconSize: 30,onPressed: () => _navigateToHome(context,countryId: 2),),
+          IconButton(
+            icon: Text(
+              'GB',
+              style: TextStyle(fontWeight: _countryId == 3 ? FontWeight.bold:FontWeight.normal),
+            ),
+            iconSize: 30,onPressed: () => _navigateToHome(context,countryId: 3),),
+          IconButton(
+            icon: Text(
+              'CN',
+              style: TextStyle(fontWeight: _countryId == 4 ? FontWeight.bold:FontWeight.normal),
+            ),
+            iconSize: 30,onPressed: () => _navigateToHome(context,countryId: 4),),
         ],
       ),
     );
+  }
+
+  void _navigateToHome(BuildContext context,{@required int countryId}) {
+    this._countryId=countryId;
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen(countryId,true)));
   }
 }
