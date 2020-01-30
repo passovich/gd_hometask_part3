@@ -6,6 +6,7 @@ import 'title_bar.dart';
 import 'package:grid_first_dz/data/news.dart';
 import 'news_widget.dart';
 import 'buttons_bar.dart';
+import 'package:grid_first_dz/data/countries.dart';
 
 class HomeScreen extends StatefulWidget {
   int _countryId=1;
@@ -20,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ScrollController _scrollController = ScrollController();
   int _countryId;
-  var _country = ['ua','ru','us','gb','cn'];
+  Countries countries = Countries();
   bool resetPage = false;
 
   _HomeScreenState(this._countryId,this.resetPage);
@@ -29,10 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     var bloc = BlocProvider.of<NewsBlock>(context);
     if (resetPage){bloc.clear();}
-    bloc.fetchNews(_country[_countryId]);
+    bloc.fetchNews(countries.country[_countryId]);
     _scrollController.addListener((){
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
-        bloc.fetchNews(_country[_countryId]);
+        bloc.fetchNews(countries.country[_countryId]);
       }
     });
 
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   Widget buildBody(BuildContext context){
     var bloc = BlocProvider.of<NewsBlock>(context);
-    bloc.fetchNews(_country[_countryId]);
+    bloc.fetchNews(countries.country[_countryId]);
 
     return StreamBuilder<List<News>>(
         stream: bloc.newsStream,
